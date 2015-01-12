@@ -26,7 +26,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $network = $this->networkFSocketOpenFactory($hostname, $port, $timeout, $this->returnCallback(function ($hostname, $port, &$errorNumber, &$error, $timeout) {
             $errorNumber = 0;
-            $error = 'Error before connect()';
+            $error       = 'Error before connect()';
 
             return false;
         }), true);
@@ -45,7 +45,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $network = $this->networkFSocketOpenFactory($hostname, $port, $timeout, $this->returnCallback(function ($hostname, $port, &$errorNumber, &$error, $timeout) {
             $errorNumber = 60;
-            $error = 'Operation timed out';
+            $error       = 'Operation timed out';
 
             return false;
         }), true);

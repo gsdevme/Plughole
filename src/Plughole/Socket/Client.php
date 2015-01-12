@@ -23,7 +23,7 @@ class Client implements ClientInterface
      * @param null $timeout
      * @param NetworkInterface $network (only here for unit tests)
      */
-    public function __construct($hostname, $port, $timeout = null, NetworkInterface $network)
+    public function __construct($hostname, $port, $timeout = null, NetworkInterface $network = null)
     {
         $this->hostname = $hostname;
         $this->port     = $port;
@@ -49,11 +49,16 @@ class Client implements ClientInterface
             return true;
         }
 
+        $this->handleException();
+    }
+
+    private function handleException()
+    {
         if ($this->errorOccurredBeforeConnectCall()) {
             throw new ProblemInitializingSocketException($this->error);
         }
 
-        if($this->errorNumber === ClientException::ERROR_OPERATION_TIMEOUT){
+        if ($this->errorNumber === ClientException::ERROR_OPERATION_TIMEOUT) {
             throw new TimeoutException($this->error, $this->errorNumber);
         }
 
