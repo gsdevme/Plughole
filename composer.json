@@ -1,0 +1,17 @@
+{
+    "name":"gsdevme/plughole",
+    "description":"Plughole a wrapper for all fsocketopen functions",
+    "keywords": [],
+    "autoload": {
+        "psr-0": {
+            "": "src"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.3.*",
+        "phpspec/phpspec": "~2.0"
+    }
+}
