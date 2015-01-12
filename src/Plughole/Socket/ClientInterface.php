@@ -26,17 +26,4 @@ interface ClientInterface
      * @return bool
      */
     public function status();
-
-    /**
-     * Enables the socket to block waiting for a response
-     *
-     * @return bool
-     */
-    public function enableBlocking();
-
-    /**
-     * Disables the socket to block
-     * @return bool
-     */
-    public function disableBloocking();
 }
