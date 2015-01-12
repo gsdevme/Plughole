@@ -12,7 +12,7 @@ class Network implements NetworkInterface
      * @param null $timeout
      * @return resource
      */
-    public function fsocketopen($hostname, $port = -1, &$errno, &$error, $timeout = null)
+    public function fsocketopen($hostname, $port = -1, &$errno = null, &$error = null, $timeout = null)
     {
         if ($timeout === null) {
             return @fsockopen($hostname, $port, $errno, $error);
