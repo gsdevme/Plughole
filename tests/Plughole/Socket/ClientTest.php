@@ -86,7 +86,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     private function getNetworkMock()
     {
         return $this->getMock('Plughole\Socket\Facade\NetworkInterface', [
-            'fsocketopen',
+            'fsockopen',
+            'socketGetStatus'
         ], [], 'Network');
     }
 
@@ -95,7 +96,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $mock = $this->getNetworkMock();
 
         $builder = $mock->expects($this->once())
-            ->method('fsocketopen')
+            ->method('fsockopen')
             ->with(
                 $hostname,
                 $port,

@@ -37,7 +37,7 @@ class Client implements ClientInterface
      */
     public function connect()
     {
-        $this->resource = $this->network->fsocketopen(
+        $this->resource = $this->network->fsockopen(
             $this->hostname,
             $this->port,
             $this->errorNumber,
@@ -90,6 +90,8 @@ class Client implements ClientInterface
      */
     public function status()
     {
+        $status = $this->network->socketGetStatus($this->resource);
 
+        var_dump(stream_get_meta_data(fopen('php://memory', 'r')));
     }
 }

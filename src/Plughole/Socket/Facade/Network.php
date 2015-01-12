@@ -5,19 +5,22 @@ namespace Plughole\Socket\Facade;
 class Network implements NetworkInterface
 {
     /**
-     * @param $hostname
-     * @param $port
-     * @param $errno
-     * @param $error
-     * @param null $timeout
-     * @return resource
+     * @inheritdoc
      */
-    public function fsocketopen($hostname, $port = -1, &$errno = null, &$error = null, $timeout = null)
+    public function fsockopen($hostname, $port = -1, &$errno = null, &$error = null, $timeout = null)
     {
         if ($timeout === null) {
             return @fsockopen($hostname, $port, $errno, $error);
         }
 
         return @fsockopen($hostname, $port, $errno, $error, $timeout);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function socketGetStatus($resource)
+    {
+        return socket_get_status($resource);
     }
 }
