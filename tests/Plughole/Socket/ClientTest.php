@@ -85,9 +85,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     private function getNetworkMock()
     {
-        return $this->getMock('Plughole\Socket\Facade\NetworkInterface', [
-            'fsockopen',
-            'socketGetStatus'
+        return $this->getMock('Plughole\Socket\Facade\Network', [
+            'fsockopen'
         ], [], 'Network');
     }
 

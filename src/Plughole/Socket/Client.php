@@ -18,9 +18,9 @@ class Client implements ClientInterface
     private $error;
 
     /**
-     * @param $hostname
-     * @param $port
-     * @param null $timeout
+     * @param                  $hostname
+     * @param                  $port
+     * @param null             $timeout
      * @param NetworkInterface $network (only here for unit tests)
      */
     public function __construct($hostname, $port, $timeout = null, NetworkInterface $network = null)
@@ -28,6 +28,10 @@ class Client implements ClientInterface
         $this->hostname = $hostname;
         $this->port     = $port;
         $this->timeout  = $timeout;
+
+        if ($network === null) {
+            $network = new Facade\Network();
+        }
 
         $this->network = $network;
     }
@@ -52,6 +56,13 @@ class Client implements ClientInterface
         $this->handleException();
     }
 
+    /**
+     * Handle the errorNumber & error to provide a meaningful exception
+     *
+     * @throws ClientException
+     * @throws ProblemInitializingSocketException
+     * @throws TimeoutException
+     */
     private function handleException()
     {
         if ($this->errorOccurredBeforeConnectCall()) {
@@ -88,10 +99,14 @@ class Client implements ClientInterface
     /**
      * @inheritdoc
      */
-    public function status()
+    public function getStatus()
     {
         $status = $this->network->socketGetStatus($this->resource);
 
-        var_dump(stream_get_meta_data(fopen('php://memory', 'r')));
+        if ($status === null) {
+            return null;
+        }
+
+        return new Stdlib\SocketStatus($status);
     }
 }

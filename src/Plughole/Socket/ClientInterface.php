@@ -23,7 +23,7 @@ interface ClientInterface
     /**
      * Retrieves header/meta data from the connection
      *
-     * @return bool
+     * @return Stdlib\SocketStatus|null
      */
-    public function status();
+    public function getStatus();
 }
