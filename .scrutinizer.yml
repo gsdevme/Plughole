@@ -5,7 +5,10 @@ filter:
         - 'examples/*'
     paths: {  }
 tools:
+    sensiolabs_security_checker: true
     external_code_coverage: true
+    php_cs_fixer:
+        config: { level: psr2 }
     php_analyzer:
         enabled: true
         extensions:
@@ -42,3 +45,15 @@ tools:
     php_code_sniffer:
         config:
             standard: "PSR2"
+    php_mess_detector:
+        enabled: true
+        configuration_file: null
+        suffixes:
+            - php
+        excluded_dirs: {  }
+        filter:
+            excluded_paths:
+                - 'vendor/*'
+                - 'tests/*'
+                - 'examples/*'
+            paths: {  }
