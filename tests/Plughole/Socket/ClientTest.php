@@ -70,6 +70,27 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $result = $client->connect();
     }
 
+    public function testStatus()
+    {
+        $hostname = 'tcp://localhost';
+        $port     = 666;
+        $timeout  = 60;
+
+        $network = $this->networkFSocketOpenFactory($hostname, $port, $timeout, $this->createStreamResource());
+
+        $client = new Client($hostname, $port, $timeout, $network);
+        $result = $client->connect();
+
+        $this->assertEquals(true, $result);
+
+        $status = $client->getStatus();
+
+        $this->assertInstanceOf('\Plughole\Socket\Stdlib\SocketStatus', $status);
+        $this->assertFalse($status->timedOut);
+        $this->assertTrue($status->blocked);
+        $this->assertEquals('php://memory', $status->uri);
+    }
+
     /**
      * This is used to create a resource type object to return for the mock
      *
